@@ -1,6 +1,7 @@
 package app;
 
 import app.config.HibernateConfig;
+import app.entities.Person;
 import app.entities.Point;
 
 import jakarta.persistence.EntityManager;
@@ -22,6 +23,12 @@ public class Main {
             em.persist(p);
         }
         em.getTransaction().commit();
+
+        em.getTransaction().begin();
+        Person person = new Person("Kim",65);
+        em.persist(person);
+        em.getTransaction().commit();
+
 
         // Find the number of Point objects in the database:
         Query q1 = em.createQuery("SELECT COUNT(p) FROM Point p");
